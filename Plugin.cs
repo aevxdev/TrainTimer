@@ -197,6 +197,9 @@ internal static class ExtractionListPatch
             ?? throw new MissingMethodException("ExitTimerPanel.SetTimerTextActive");
         harmony.Patch(setText, postfix: new HarmonyMethod(typeof(ExtractionListPatch), nameof(AfterSetText)));
         harmony.Patch(setActive, postfix: new HarmonyMethod(typeof(ExtractionListPatch), nameof(AfterSetActive)));
+        var updateVisited = AccessTools.Method(typeof(ExitTimerPanel), nameof(ExitTimerPanel.UpdateVisitedStatus))
+            ?? throw new MissingMethodException("ExitTimerPanel.UpdateVisitedStatus");
+        harmony.Patch(updateVisited, postfix: new HarmonyMethod(typeof(ExtractionListPatch), nameof(AfterUpdateVisited)));
     }
 
     private static Locomotive? TrainOf(ExitTimerPanel panel)
@@ -210,6 +213,14 @@ internal static class ExtractionListPatch
     private static void AfterSetActive(ExitTimerPanel __instance)
     {
         if (TrainOf(__instance) != null) __instance.TimerText.gameObject.SetActive(true);
+    }
+
+    // once the exit is visited the game shows requirement tips and fence rep where the timer sits
+    private static void AfterUpdateVisited(ExitTimerPanel __instance)
+    {
+        if (TrainOf(__instance) == null) return;
+        if (__instance._itemsObject != null) __instance._itemsObject.SetActive(false);
+        if (__instance._discountStats != null) __instance._discountStats.SetActive(false);
     }
 
     private static void AfterSetText(ExitTimerPanel __instance)
