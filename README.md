@@ -43,3 +43,5 @@ Instale extraindo o zip na pasta do jogo (a que tem `BepInEx`).
 ## License
 
 MIT
+
+<sub>Enjoying the mod? Curtiu o mod? [Buy me a coffee on Ko-fi](https://ko-fi.com/zezinhoeft)</sub>
