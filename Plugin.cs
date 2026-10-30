@@ -41,7 +41,7 @@ public enum TrainPhase
 /// Shows how long until the armored train arrives and how long until it leaves: on the train's row of the
 /// game's own extraction list, and optionally as a small line on screen.
 /// </summary>
-[BepInPlugin("com.zezinho.traintimer", "zezinho-TrainTimer", "1.0.0")]
+[BepInPlugin("com.zezinho.traintimer", "zezinho-TrainTimer", "1.0.1")]
 public class Plugin : BaseUnityPlugin
 {
     internal static ConfigEntry<bool> Enabled = null!;
